@@ -1,0 +1,307 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Management System | ResQ</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- LOGIN AND REGISTRATION SCREEN -->
+    <div id="authScreen" class="auth-screen">
+
+        <div class="auth-art">
+            <div class="brand-mark">✚</div>
+
+            <p class="eyebrow">READY. RESPOND. RECOVER.</p>
+
+            <h1>Disaster Management System</h1>
+
+            <p>
+                A single place to report emergencies, coordinate rescue
+                teams and manage relief resources.
+            </p>
+
+            <div class="auth-points">
+                <span>✓ Fast reporting</span>
+                <span>✓ Centralized records</span>
+                <span>✓ In-app alerts</span>
+            </div>
+        </div>
+
+        <div class="auth-panel">
+
+            <div class="auth-tabs">
+                <button type="button"
+                        class="tab active"
+                        data-auth="login">
+                    Sign in
+                </button>
+
+                <button type="button"
+                        class="tab"
+                        data-auth="register">
+                    Create account
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" class="auth-form">
+                <h2>Welcome back</h2>
+
+                <p class="muted">
+                    Sign in to continue to your dashboard.
+                </p>
+
+                <label>
+                    Email address
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="username"
+                        required>
+                </label>
+
+                <label>
+                    Password
+                    <input
+                        name="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+                </label>
+
+                <button type="submit" class="btn primary full">
+                    Sign in <span>→</span>
+                </button>
+
+                <p class="hint">
+                    Demo admin:
+                    <b>admin@disaster.local</b> /
+                    <b>Admin@123</b>
+                </p>
+            </form>
+
+            <!-- REGISTRATION FORM -->
+            <form id="registerForm" class="auth-form hidden">
+                <h2>Create your account</h2>
+
+                <p class="muted">
+                    Join the disaster response network.
+                </p>
+
+                <label>
+                    Full name
+                    <input
+                        name="name"
+                        type="text"
+                        placeholder="Your full name"
+                        autocomplete="name"
+                        required>
+                </label>
+
+                <label>
+                    Email address
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required>
+                </label>
+
+                <label>
+                    Phone number
+                    <input
+                        name="phone"
+                        type="tel"
+                        placeholder="Phone number"
+                        autocomplete="tel">
+                </label>
+
+                <label>
+                    Password
+                    <input
+                        name="password"
+                        type="password"
+                        minlength="6"
+                        placeholder="At least 6 characters"
+                        autocomplete="new-password"
+                        required>
+                </label>
+
+                <button type="submit" class="btn primary full">
+                    Create account <span>→</span>
+                </button>
+            </form>
+
+            <div id="authMessage" class="message" role="status"
+                 aria-live="polite"></div>
+        </div>
+    </div>
+
+
+    <!-- MAIN APPLICATION -->
+    <div id="appScreen" class="app hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="side-brand">
+                <div class="brand-mark small">✚</div>
+
+                <div>
+                    <b>ResQ</b>
+                    <small>DISASTER RESPONSE</small>
+                </div>
+            </div>
+
+            <!-- LOGGED-IN USER DETAILS -->
+            <div class="side-user">
+                <div class="avatar" id="avatar">U</div>
+
+                <div>
+                    <b id="sideName">User</b>
+                    <small id="sideRole">Community Member</small>
+                </div>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav id="nav" aria-label="Main navigation">
+
+                <button type="button"
+                        class="nav-item active"
+                        data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="reports">
+                    <span>▤</span> Disaster reports
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="alerts">
+                    <span>⚠</span> Emergency alerts
+                    <i id="alertDot"></i>
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="teams">
+                    <span>♧</span> Rescue teams
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="assignments">
+                    <span>⇄</span> Assignments
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="resources">
+                    <span>▧</span> Relief resources
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-page="notifications">
+                    <span>♧</span> Notifications
+                    <em id="unreadBadge" class="count">0</em>
+                </button>
+
+            </nav>
+
+            <!-- SIDEBAR FOOTER -->
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+                    <span>✦</span>
+                    <b>Stay prepared</b>
+
+                    <p>
+                        Keep emergency contacts and local alerts
+                        up to date.
+                    </p>
+                </div>
+
+                <!-- WORKING LOGOUT BUTTON HOOK -->
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="logout">
+                    <span>↪</span> Sign out
+                </button>
+
+            </div>
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+
+            <!-- HEADER -->
+            <header class="topbar">
+
+                <div>
+                    <div class="breadcrumb">
+                        Workspace
+                        <span>/</span>
+                        <b id="crumb">Dashboard</b>
+                    </div>
+
+                    <h1 id="pageTitle">
+                        Good day,
+                        <span id="welcomeName">User</span> 👋
+                    </h1>
+
+                    <p id="pageSubtitle">
+                        Here is your disaster response overview.
+                    </p>
+                </div>
+
+                <div class="top-actions">
+
+                    <button
+                        type="button"
+                        class="icon-btn"
+                        id="bellBtn"
+                        title="Notifications"
+                        aria-label="Open notifications">
+                        ♧
+                        <i id="bellDot"></i>
+                    </button>
+
+                    <div class="top-avatar" id="topAvatar">U</div>
+
+                </div>
+            </header>
+
+            <!-- STATUS MESSAGE -->
+            <div id="toast"
+                 class="toast hidden"
+                 role="status"
+                 aria-live="polite"></div>
+
+            <!-- ALL MODULES ARE RENDERED HERE BY app.js -->
+            <section id="pageContent"></section>
+
+            <!-- FOOTER -->
+            <footer>
+                ResQ Disaster Management System
+                <span>•</span>
+                Community safety through coordination
+            </footer>
+        </main>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
+```
